@@ -4,8 +4,8 @@ const DEFAULT_PHONE = "919999999999";
 
 window.TRADENEST_CONFIG = {
   phoneNumber: DEFAULT_PHONE,
-  supabaseUrl: SUPABASE_URL,
-  supabaseAnonKey: SUPABASE_ANON_KEY,
+  supabaseUrl: https://vvtjbcbxbwtgbixukjwd.supabase.co,
+  supabaseAnonKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2dGpiY2J4Ynd0Z2JpeHVrandkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5NzM3NzQsImV4cCI6MjA5MjU0OTc3NH0.pQqS-lEnqzCt3AnxqsuVxeT79VrNQKyZPb3yG2ZeHrg,
 };
 
 window.tradenestSupabase = (() => {
@@ -14,8 +14,8 @@ window.tradenestSupabase = (() => {
     typeof SUPABASE_ANON_KEY === "string" &&
     SUPABASE_URL.trim() !== "" &&
     SUPABASE_ANON_KEY.trim() !== "" &&
-    !SUPABASE_URL.includes("PASTE_YOUR") &&
-    !SUPABASE_ANON_KEY.includes("PASTE_YOUR");
+    !SUPABASE_URL.includes("https://vvtjbcbxbwtgbixukjwd.supabase.co") &&
+    !SUPABASE_ANON_KEY.includes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2dGpiY2J4Ynd0Z2JpeHVrandkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5NzM3NzQsImV4cCI6MjA5MjU0OTc3NH0.pQqS-lEnqzCt3AnxqsuVxeT79VrNQKyZPb3yG2ZeHrg");
 
   const client =
     hasConfig && window.supabase

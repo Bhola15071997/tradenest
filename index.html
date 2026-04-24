@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tradenest | Construction Materials Enquiry Store</title>
+  <meta name="description" content="Tradenest is a single-vendor construction materials ordering website with WhatsApp-first price enquiries, Supabase product loading and local enquiry cart." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          boxShadow: {
+            soft: "0 20px 45px rgba(15, 23, 42, 0.08)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="site-shell" data-page-category="">
+  <div class="sticky-top header-glass">
+    <header class="mx-auto max-w-7xl px-4 py-3 md:px-6">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="brand-badge flex h-12 w-12 items-center justify-center rounded-2xl text-lg font-black text-white">T</div>
+            <div>
+              <p class="text-2xl font-black tracking-tight text-slate-900">Tradenest</p>
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Build Better Supply</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="grid flex-1 gap-3 lg:mx-8 lg:grid-cols-[minmax(0,1fr)_180px]">
+          <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft">
+            <span class="text-slate-400">🔍</span>
+            <input id="search-input" type="search" placeholder="Search products, brands, categories..." class="w-full border-0 bg-transparent text-sm outline-none" />
+          </label>
+          <select data-district-select class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-soft outline-none">
+            <option>Korba</option>
+            <option>Raipur</option>
+            <option>Bilaspur</option>
+            <option>Durg</option>
+            <option selected>Other</option>
+          </select>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="https://wa.me/919999999999" class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">WhatsApp</a>
+          <a href="tel:+919999999999" class="cta-call rounded-2xl px-4 py-3 text-sm font-bold text-white">Call</a>
+          <button data-open-cart type="button" class="relative rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">
+            Enquiry Cart
+            <span data-cart-count class="ml-2 inline-flex min-w-7 items-center justify-center rounded-full bg-orange-500 px-2 py-1 text-xs text-white">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="border-t border-slate-200/80 bg-white/90">
+      <div id="category-nav" class="mobile-scroll mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 md:px-6"></div>
+    </nav>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
+    <div id="supabase-notice" class="mb-6 rounded-3xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-800">
+      Add your `SUPABASE_URL` and `SUPABASE_ANON_KEY` in <code>supabase-client.js</code> to load real products and save enquiries.
+    </div>
+
+    <section id="hero-slider" class="fade-up"></section>
+
+    <section class="mt-8">
+      <div class="mb-5 flex items-center justify-between">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Categories</p>
+          <h2 class="mt-1 text-2xl font-black text-slate-900">Browse By Material Type</h2>
+        </div>
+      </div>
+      <div id="category-grid" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5"></div>
+    </section>
+
+    <section id="featured-products" class="mt-10">
+      <div class="flex flex-col gap-4 rounded-[2rem] bg-slate-900 p-6 text-white md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300">Featured Products</p>
+          <h2 class="mt-2 text-3xl font-black">Live Inventory From Supabase</h2>
+          <p class="mt-3 max-w-2xl text-sm text-slate-300">Search instantly, filter by category or brand, choose quantity and send WhatsApp price requests without a checkout server.</p>
+        </div>
+        <div class="flex flex-col gap-3 md:w-[420px] md:flex-row">
+          <select id="category-filter" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-semibold text-white outline-none"></select>
+          <select id="brand-filter" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-semibold text-white outline-none"></select>
+        </div>
+      </div>
+
+      <div class="mt-5 flex items-center justify-between">
+        <p id="result-count" class="text-sm font-semibold text-slate-500">0 products</p>
+      </div>
+      <div id="product-grid" class="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-4"></div>
+      <div id="empty-state" class="section-card mt-5 hidden rounded-3xl p-10 text-center">
+        <h3 class="text-xl font-black text-slate-900">No products matched your filters</h3>
+        <p class="mt-2 text-sm text-slate-500">Try another keyword, category or brand selection.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <div class="mb-5">
+        <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Popular Brands</p>
+        <h2 class="mt-2 text-2xl font-black text-slate-900">Preferred By Contractors And Retailers</h2>
+      </div>
+      <div id="brand-strip" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"></div>
+    </section>
+
+    <section id="bulk-order" class="bulk-banner mt-10 overflow-hidden rounded-[2rem] p-7 md:p-9">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Bulk Order Support</p>
+          <h2 class="mt-2 text-3xl font-black text-slate-900">For project sites, dealers and repeat procurement teams</h2>
+          <p class="mt-4 max-w-2xl text-sm text-slate-600">Bundle multiple items, share delivery district and quantity requirements, then continue pricing discussion on WhatsApp. Your team controls products directly from the Supabase dashboard.</p>
+          <div class="mt-6 grid gap-3 sm:grid-cols-3">
+            <div class="rounded-2xl bg-orange-50 p-4">
+              <p class="text-sm font-bold text-slate-900">No direct checkout</p>
+              <p class="mt-2 text-sm text-slate-600">Quotation-first workflow for custom pricing.</p>
+            </div>
+            <div class="rounded-2xl bg-emerald-50 p-4">
+              <p class="text-sm font-bold text-slate-900">Local district routing</p>
+              <p class="mt-2 text-sm text-slate-600">Korba, Raipur, Bilaspur, Durg and more.</p>
+            </div>
+            <div class="rounded-2xl bg-sky-50 p-4">
+              <p class="text-sm font-bold text-slate-900">GitHub Pages ready</p>
+              <p class="mt-2 text-sm text-slate-600">Static frontend, browser-side Supabase client.</p>
+            </div>
+          </div>
+        </div>
+
+        <form id="bulk-order-form" class="section-card rounded-[2rem] p-6">
+          <div class="mb-5">
+            <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Request Bulk Quote</p>
+            <h3 class="mt-2 text-2xl font-black text-slate-900">Share project requirements</h3>
+          </div>
+
+          <div class="grid gap-4">
+            <input name="name" required placeholder="Name" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+            <input name="phone" required placeholder="Phone" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+            <input name="product" required placeholder="Product" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+            <input name="quantity" required placeholder="Quantity" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+            <select name="district" required class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none">
+              <option>Korba</option>
+              <option>Raipur</option>
+              <option>Bilaspur</option>
+              <option>Durg</option>
+              <option>Other</option>
+            </select>
+            <button type="submit" class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">Submit Enquiry</button>
+          </div>
+          <p id="bulk-order-status" class="mt-4 text-sm font-semibold text-slate-500">The form writes to Supabase `enquiries` and also opens WhatsApp.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-12 bg-slate-950 text-white">
+    <div class="footer-grid mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-4 md:px-6">
+      <div>
+        <p class="text-2xl font-black">Tradenest</p>
+        <p class="mt-3 text-sm text-slate-300">Single-vendor construction materials enquiry storefront for WhatsApp-first pricing and quotation workflows.</p>
+      </div>
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-orange-300">Categories</p>
+        <div class="mt-4 grid gap-2 text-sm text-slate-300">
+          <a href="adhesives.html">Adhesives</a>
+          <a href="hardware.html">Hardware</a>
+          <a href="tools.html">Tools</a>
+          <a href="plumbing.html">Plumbing</a>
+          <a href="tiles.html">Tiles</a>
+        </div>
+      </div>
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-orange-300">Contact</p>
+        <div class="mt-4 grid gap-2 text-sm text-slate-300">
+          <a href="https://wa.me/919999999999">WhatsApp Sales</a>
+          <a href="tel:+919999999999">Call Now</a>
+          <span>Mon-Sat, 9 AM to 7 PM</span>
+        </div>
+      </div>
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-orange-300">Supabase Setup</p>
+        <p class="mt-4 text-sm text-slate-300">Create `products` and `enquiries` tables, then paste your Supabase project values into <code>supabase-client.js</code>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="drawer-backdrop" class="drawer-backdrop fixed inset-0 z-[70] hidden"></div>
+  <aside id="cart-drawer" class="cart-drawer fixed right-0 top-0 z-[75] flex h-screen translate-x-full flex-col bg-white shadow-2xl transition duration-300">
+    <div class="border-b border-slate-200 p-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">Quotation Cart</p>
+          <h2 class="mt-1 text-2xl font-black text-slate-900">Enquiry Cart</h2>
+        </div>
+        <button id="close-cart" type="button" class="rounded-full bg-slate-100 px-3 py-2 text-sm font-bold text-slate-800">Close</button>
+      </div>
+    </div>
+    <div class="flex-1 overflow-y-auto p-5">
+      <div id="cart-empty" class="rounded-3xl border border-dashed border-slate-300 p-6 text-center text-sm font-semibold text-slate-500">Add products to build a quotation request.</div>
+      <div id="cart-items" class="grid gap-3"></div>
+    </div>
+    <div class="border-t border-slate-200 p-5">
+      <div class="grid gap-3">
+        <button id="cart-whatsapp" type="button" class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">Send Quotation on WhatsApp</button>
+        <button id="clear-cart" type="button" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700">Clear Cart</button>
+      </div>
+    </div>
+  </aside>
+
+  <div id="toast" class="hidden"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

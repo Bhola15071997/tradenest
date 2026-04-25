@@ -17,7 +17,7 @@
       },
     };
   </script>
-  <link rel="stylesheet" href="style.css?v=20260425" />
+  <link rel="stylesheet" href="style.css?v=20260426" />
 </head>
 <body class="site-shell" data-page-category="">
   <div class="sticky-top header-glass">
@@ -152,9 +152,12 @@
               <option>Durg</option>
               <option>Other</option>
             </select>
-            <button type="submit" class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">Submit Enquiry</button>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <button type="submit" class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">Save Enquiry</button>
+              <button id="bulk-whatsapp-button" type="button" class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">Send on WhatsApp</button>
+            </div>
           </div>
-          <p id="bulk-order-status" class="mt-4 text-sm font-semibold text-slate-500">The form writes to Supabase `enquiries` and also opens WhatsApp.</p>
+          <p id="bulk-order-status" class="mt-4 text-sm font-semibold text-slate-500">Save the enquiry in Supabase or send the same details on WhatsApp with a separate button.</p>
         </form>
       </div>
     </section>
@@ -218,8 +221,8 @@
   <div id="toast" class="hidden"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=20260425"></script>
-  <script src="cart.js?v=20260425"></script>
-  <script src="script.js?v=20260425"></script>
+  <script src="supabase-client.js?v=20260426"></script>
+  <script src="cart.js?v=20260426"></script>
+  <script src="script.js?v=20260426"></script>
 </body>
 </html>

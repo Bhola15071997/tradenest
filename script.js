@@ -472,16 +472,15 @@ const setupDistrictSync = () => {
 const setupBulkForm = () => {
   const form = document.getElementById("bulk-order-form");
   const status = document.getElementById("bulk-order-status");
+  const whatsappButton = document.getElementById("bulk-whatsapp-button");
 
   if (!form) {
     return;
   }
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
+  const getBulkPayload = () => {
     const formData = new FormData(form);
-    const payload = {
+    return {
       name: formData.get("name"),
       phone: formData.get("phone"),
       product: formData.get("product"),
@@ -490,6 +489,17 @@ const setupBulkForm = () => {
       enquiry_type: "bulk_order",
       created_at: new Date().toISOString(),
     };
+  };
+
+  const buildBulkWhatsAppMessage = (payload) =>
+    encodeURIComponent(
+      `Hello, I want bulk quotation for ${payload.product}, quantity ${payload.quantity}, district ${payload.district}. Name: ${payload.name}, Phone: ${payload.phone}`
+    );
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const payload = getBulkPayload();
 
     status.textContent = "Submitting your bulk enquiry...";
     status.className = "mt-4 text-sm font-semibold text-slate-600";
@@ -504,12 +514,17 @@ const setupBulkForm = () => {
       status.textContent = "Bulk enquiry saved in Supabase.";
       status.className = "mt-4 text-sm font-semibold text-emerald-600";
     }
-
-    const message = encodeURIComponent(
-      `Hello, I want bulk quotation for ${payload.product}, quantity ${payload.quantity}, district ${payload.district}. Name: ${payload.name}, Phone: ${payload.phone}`
-    );
-    window.open(generateWhatsAppUrl(message), "_blank");
     form.reset();
+  });
+
+  whatsappButton?.addEventListener("click", () => {
+    if (!form.reportValidity()) {
+      return;
+    }
+
+    const payload = getBulkPayload();
+    const message = buildBulkWhatsAppMessage(payload);
+    window.open(generateWhatsAppUrl(message), "_blank");
   });
 };
 

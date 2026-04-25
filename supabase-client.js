@@ -37,7 +37,7 @@ window.tradenestSupabase = (() => {
       const supabase = ensureClient();
       let query = supabase
         .from("products")
-        .select("id, product_name, category, brand, image_url, description")
+        .select("*")
         .order("product_name", { ascending: true });
 
       if (category) {
@@ -80,7 +80,7 @@ window.tradenestSupabase = (() => {
       const supabase = ensureClient();
       const { data, error } = await supabase
         .from("enquiries")
-        .select("id, name, phone, product, quantity, district, enquiry_type, created_at")
+        .select("*")
         .order("created_at", { ascending: false });
 
       if (error) {
@@ -144,6 +144,41 @@ window.tradenestSupabase = (() => {
     }
   };
 
+  const saveEnquiry = async (payload, id) => {
+    try {
+      const supabase = ensureClient();
+      const { data, error } = await supabase
+        .from("enquiries")
+        .update(payload)
+        .eq("id", id)
+        .select()
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      return { data, error: null };
+    } catch (error) {
+      return { data: null, error };
+    }
+  };
+
+  const deleteEnquiry = async (id) => {
+    try {
+      const supabase = ensureClient();
+      const { error } = await supabase.from("enquiries").delete().eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+
+      return { error: null };
+    } catch (error) {
+      return { error };
+    }
+  };
+
   const signInAdmin = async (email, password) => {
     try {
       const supabase = ensureClient();
@@ -187,6 +222,8 @@ window.tradenestSupabase = (() => {
     fetchEnquiries,
     saveProduct,
     deleteProduct,
+    saveEnquiry,
+    deleteEnquiry,
     signInAdmin,
     signOutAdmin,
     getSession,

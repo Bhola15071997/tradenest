@@ -100,6 +100,16 @@ const showToast = (text, tone = "dark") => {
 const createCategoryGrid = () => {
   const grid = document.getElementById("category-grid");
   const nav = document.getElementById("category-nav");
+  const mobileNav = document.getElementById("category-nav-mobile");
+  const navMarkup = TRADENEST_CATEGORIES.map((category) => {
+    const active = category.slug === getPageCategory();
+    return `
+      <a href="${category.slug}.html"
+        class="nav-pill whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold ${active ? "bg-slate-900 text-white" : "bg-white text-slate-700"}">
+        ${category.label}
+      </a>
+    `;
+  }).join("");
 
   if (grid) {
     grid.innerHTML = TRADENEST_CATEGORIES.map(
@@ -114,15 +124,11 @@ const createCategoryGrid = () => {
   }
 
   if (nav) {
-    nav.innerHTML = TRADENEST_CATEGORIES.map((category) => {
-      const active = category.slug === getPageCategory();
-      return `
-        <a href="${category.slug}.html"
-          class="nav-pill whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold ${active ? "bg-slate-900 text-white" : "bg-white text-slate-700"}">
-          ${category.label}
-        </a>
-      `;
-    }).join("");
+    nav.innerHTML = navMarkup;
+  }
+
+  if (mobileNav) {
+    mobileNav.innerHTML = navMarkup;
   }
 };
 
@@ -537,6 +543,20 @@ const toggleSupabaseNotice = () => {
   notice.classList.toggle("hidden", window.tradenestSupabase.hasConfig);
 };
 
+const setupMobileMenu = () => {
+  const toggle = document.getElementById("mobile-menu-toggle");
+  const panel = document.getElementById("mobile-menu-panel");
+
+  if (!toggle || !panel) {
+    return;
+  }
+
+  toggle.addEventListener("click", () => {
+    const isHidden = panel.classList.toggle("hidden");
+    toggle.setAttribute("aria-expanded", String(!isHidden));
+  });
+};
+
 document.addEventListener("tradenest:cart-updated", renderCart);
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -547,6 +567,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupDistrictSync();
   setupCartDrawer();
   setupBulkForm();
+  setupMobileMenu();
   toggleSupabaseNotice();
   renderCart();
   await loadProducts();

@@ -17,24 +17,27 @@
       },
     };
   </script>
-  <link rel="stylesheet" href="style.css?v=20260428" />
+  <link rel="stylesheet" href="style.css?v=20260429" />
 </head>
 <body class="site-shell" data-page-category="">
   <div class="sticky-top header-glass">
     <header class="mx-auto max-w-7xl px-4 py-3 md:px-6">
-      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div class="flex items-center gap-3">
-          <a href="index.html" class="flex items-center gap-3">
-            <div>
-              <img src="assets/tradenest-logo.png" alt="Tradenest logo" class="brand-logo-header" loading="eager" />
-              <p class="brand-line mt-1 text-[10px] font-semibold uppercase text-slate-500">Building Trust, Delivering Value</p>
-            </div>
+      <div class="header-layout">
+        <div class="header-brand-row">
+          <a href="index.html" class="brand-link">
+            <img src="assets/tradenest-logo.png" alt="Tradenest logo" class="brand-logo-header" loading="eager" />
           </a>
+          <button id="mobile-menu-toggle" type="button" class="mobile-menu-button lg:hidden" aria-expanded="false" aria-controls="mobile-menu-panel">
+            <span class="sr-only">Open menu</span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
 
-        <div class="grid flex-1 gap-3 lg:mx-8 lg:grid-cols-[minmax(0,1fr)_180px]">
-          <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft">
-            <span class="text-slate-400">🔍</span>
+        <div class="header-search-group">
+          <label class="search-shell flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft">
+            <span class="text-slate-400" aria-hidden="true">⌕</span>
             <input id="search-input" type="search" placeholder="Search products, brands, categories..." class="w-full border-0 bg-transparent text-sm outline-none" />
           </label>
           <select data-district-select class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-soft outline-none">
@@ -46,28 +49,35 @@
           </select>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3">
+        <div class="header-actions desktop-actions">
           <a href="https://wa.me/919999999999" class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">WhatsApp</a>
           <a href="tel:+919999999999" class="cta-call rounded-2xl px-4 py-3 text-sm font-bold text-white">Call</a>
-          <a href="admin.html" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">Admin</a>
           <button data-open-cart type="button" class="relative rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">
             Enquiry Cart
             <span data-cart-count class="ml-2 inline-flex min-w-7 items-center justify-center rounded-full bg-orange-500 px-2 py-1 text-xs text-white">0</span>
           </button>
         </div>
       </div>
+
+      <div id="mobile-menu-panel" class="mobile-menu-panel hidden lg:hidden">
+        <div class="header-actions">
+          <a href="https://wa.me/919999999999" class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">WhatsApp</a>
+          <a href="tel:+919999999999" class="cta-call rounded-2xl px-4 py-3 text-sm font-bold text-white">Call</a>
+          <button data-open-cart type="button" class="relative rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">
+            Enquiry Cart
+            <span data-cart-count class="ml-2 inline-flex min-w-7 items-center justify-center rounded-full bg-orange-500 px-2 py-1 text-xs text-white">0</span>
+          </button>
+        </div>
+        <div id="category-nav-mobile" class="mobile-scroll mt-3 flex items-center gap-3"></div>
+      </div>
     </header>
 
-    <nav class="border-t border-slate-200/80 bg-white/90">
+    <nav class="desktop-nav border-t border-slate-200/80 bg-white/90">
       <div id="category-nav" class="mobile-scroll mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 md:px-6"></div>
     </nav>
   </div>
 
   <main class="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
-    <div id="supabase-notice" class="mb-6 rounded-3xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-800">
-      Add your `SUPABASE_URL` and `SUPABASE_ANON_KEY` in <code>supabase-client.js</code> to load real products and save enquiries.
-    </div>
-
     <section id="hero-slider" class="fade-up"></section>
 
     <section class="mt-8">
@@ -84,7 +94,7 @@
       <div class="flex flex-col gap-4 rounded-[2rem] bg-slate-900 p-6 text-white md:flex-row md:items-end md:justify-between">
         <div>
           <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-300">Featured Products</p>
-          <h2 class="mt-2 text-3xl font-black">Live Inventory From Supabase</h2>
+          <h2 class="mt-2 text-3xl font-black">Live Inventory</h2>
           <p class="mt-3 max-w-2xl text-sm text-slate-300">Search instantly, filter by category or brand, choose quantity and send WhatsApp price requests without a checkout server.</p>
         </div>
         <div class="flex flex-col gap-3 md:w-[420px] md:flex-row">
@@ -116,7 +126,7 @@
         <div>
           <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Bulk Order Support</p>
           <h2 class="mt-2 text-3xl font-black text-slate-900">For project sites, dealers and repeat procurement teams</h2>
-          <p class="mt-4 max-w-2xl text-sm text-slate-600">Bundle multiple items, share delivery district and quantity requirements, then continue pricing discussion on WhatsApp. Your team controls products directly from the Supabase dashboard.</p>
+          <p class="mt-4 max-w-2xl text-sm text-slate-600">Bundle multiple items, share delivery district and quantity requirements, then continue pricing discussion on WhatsApp.</p>
           <div class="mt-6 grid gap-3 sm:grid-cols-3">
             <div class="rounded-2xl bg-orange-50 p-4">
               <p class="text-sm font-bold text-slate-900">No direct checkout</p>
@@ -127,8 +137,8 @@
               <p class="mt-2 text-sm text-slate-600">Korba, Raipur, Bilaspur, Durg and more.</p>
             </div>
             <div class="rounded-2xl bg-sky-50 p-4">
-              <p class="text-sm font-bold text-slate-900">GitHub Pages ready</p>
-              <p class="mt-2 text-sm text-slate-600">Static frontend, browser-side Supabase client.</p>
+              <p class="text-sm font-bold text-slate-900">Professional support</p>
+              <p class="mt-2 text-sm text-slate-600">Fast response for stores, builders and contractors.</p>
             </div>
           </div>
         </div>
@@ -187,9 +197,13 @@
         </div>
       </div>
       <div>
-        <p class="text-sm font-bold uppercase tracking-[0.2em] text-orange-300">Supabase Setup</p>
-        <p class="mt-4 text-sm text-slate-300">Create `products` and `enquiries` tables, then paste your Supabase project values into <code>supabase-client.js</code>.</p>
-        <a href="admin.html" class="mt-4 inline-flex text-sm font-bold text-orange-300">Open Admin Panel</a>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-orange-300">Why Tradenest</p>
+        <div class="mt-4 grid gap-2 text-sm text-slate-300">
+          <span>WhatsApp-first quotations</span>
+          <span>Fast district-based support</span>
+          <span>Bulk order assistance</span>
+          <span>Trusted material sourcing</span>
+        </div>
       </div>
     </div>
   </footer>
@@ -220,8 +234,8 @@
   <div id="toast" class="hidden"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=20260428"></script>
-  <script src="cart.js?v=20260428"></script>
-  <script src="script.js?v=20260428"></script>
+  <script src="supabase-client.js?v=20260429"></script>
+  <script src="cart.js?v=20260429"></script>
+  <script src="script.js?v=20260429"></script>
 </body>
 </html>

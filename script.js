@@ -497,7 +497,8 @@ const setupBulkForm = () => {
     const { error } = await window.tradenestSupabase.createEnquiry(payload);
 
     if (error) {
-      status.textContent = "Saved to WhatsApp flow only. Add matching columns/table in Supabase to store enquiries.";
+      console.error("Bulk enquiry insert failed:", error);
+      status.textContent = `Supabase save failed: ${error.message || "Unknown error"}. WhatsApp message is still opening.`;
       status.className = "mt-4 text-sm font-semibold text-amber-600";
     } else {
       status.textContent = "Bulk enquiry saved in Supabase.";

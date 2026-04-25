@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tradenest Admin | Product Control Panel</title>
+  <meta name="description" content="Tradenest admin panel for managing products and viewing enquiries through Supabase." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css?v=20260425" />
+</head>
+<body class="site-shell bg-slate-100">
+  <main class="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
+    <section class="section-card rounded-[2rem] p-6 md:p-8">
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Protected Workspace</p>
+          <h1 class="mt-2 text-4xl font-black text-slate-900">Tradenest Admin Panel</h1>
+          <p class="mt-3 max-w-2xl text-sm text-slate-600">Sign in with a Supabase Auth user to add, edit and delete products directly from the website, then review incoming enquiries.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="index.html" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800">Back to Store</a>
+          <button id="admin-logout" type="button" class="hidden rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">Log Out</button>
+        </div>
+      </div>
+      <p id="admin-status" class="mt-5 text-sm font-semibold text-slate-600"></p>
+    </section>
+
+    <section id="admin-login-view" class="mt-6 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+      <div class="section-card rounded-[2rem] p-6">
+        <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Admin Sign In</p>
+        <h2 class="mt-2 text-2xl font-black text-slate-900">Use Supabase Auth</h2>
+        <form id="admin-login-form" class="mt-6 grid gap-4">
+          <input name="email" type="email" required placeholder="Admin email" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+          <input name="password" type="password" required placeholder="Password" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+          <button type="submit" class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">Sign In</button>
+        </form>
+      </div>
+      <div class="section-card rounded-[2rem] p-6">
+        <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Setup Notes</p>
+        <div class="mt-4 grid gap-3 text-sm text-slate-600">
+          <p>Create the admin user in Supabase Authentication before using this page.</p>
+          <p>Use Row Level Security policies so only authenticated users can insert, update and delete products or read enquiries.</p>
+          <p>Keep the public store on GitHub Pages and let this panel talk directly to Supabase through the browser.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="admin-dashboard-view" class="mt-6 hidden space-y-6">
+      <div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+        <div class="section-card rounded-[2rem] p-6">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Signed In</p>
+              <h2 class="mt-2 text-2xl font-black text-slate-900">Product Form</h2>
+            </div>
+            <p class="rounded-full bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-700" id="admin-user-email"></p>
+          </div>
+
+          <form id="product-form" class="mt-6 grid gap-4">
+            <input name="product_name" required placeholder="Product name" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+            <select id="admin-category-select" name="category" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none"></select>
+            <input name="brand" required placeholder="Brand" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+            <input name="image_url" placeholder="Image URL" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
+            <textarea name="description" rows="4" placeholder="Description" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none"></textarea>
+            <div class="flex flex-wrap gap-3">
+              <button type="submit" class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">
+                <span id="product-submit-text">Save Product</span>
+              </button>
+              <button id="product-cancel-edit" type="button" class="hidden rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700">Cancel Edit</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="section-card rounded-[2rem] p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Incoming Leads</p>
+              <h2 class="mt-2 text-2xl font-black text-slate-900">Bulk Enquiries</h2>
+            </div>
+          </div>
+          <div class="mt-6 overflow-x-auto">
+            <table class="min-w-full">
+              <thead>
+                <tr class="border-b border-slate-200 text-left text-xs uppercase tracking-[0.18em] text-slate-500">
+                  <th class="px-4 py-3">Name</th>
+                  <th class="px-4 py-3">Phone</th>
+                  <th class="px-4 py-3">Product</th>
+                  <th class="px-4 py-3">Qty</th>
+                  <th class="px-4 py-3">District</th>
+                  <th class="px-4 py-3">Date</th>
+                </tr>
+              </thead>
+              <tbody id="enquiries-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card rounded-[2rem] p-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Product Catalog</p>
+            <h2 class="mt-2 text-2xl font-black text-slate-900">Manage Inventory</h2>
+          </div>
+        </div>
+        <div class="mt-6 overflow-x-auto">
+          <table class="min-w-full">
+            <thead>
+              <tr class="border-b border-slate-200 text-left text-xs uppercase tracking-[0.18em] text-slate-500">
+                <th class="px-4 py-3">Product</th>
+                <th class="px-4 py-3">Category</th>
+                <th class="px-4 py-3">Brand</th>
+                <th class="px-4 py-3">Description</th>
+                <th class="px-4 py-3 text-right">Edit</th>
+                <th class="px-4 py-3 text-right">Delete</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js?v=20260425"></script>
+  <script src="admin.js?v=20260425"></script>
+</body>
+</html>

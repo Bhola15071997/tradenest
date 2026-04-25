@@ -49,6 +49,32 @@ body {
   box-shadow: 0 14px 24px rgba(249, 115, 22, 0.28);
 }
 
+.brand-logo-full {
+  width: min(100%, 240px);
+  height: auto;
+  display: block;
+}
+
+.brand-logo-header {
+  width: min(100%, 260px);
+  height: auto;
+  display: block;
+}
+
+.brand-logo-compact {
+  width: 86px;
+  height: 86px;
+  border-radius: 28px;
+  object-fit: cover;
+  object-position: center;
+  background: #fff;
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.1);
+}
+
+.brand-line {
+  letter-spacing: 0.36em;
+}
+
 .nav-pill,
 .chip-button {
   transition: 0.2s ease;
@@ -157,6 +183,10 @@ body {
 }
 
 @media (max-width: 767px) {
+  .brand-logo-header {
+    width: min(100%, 200px);
+  }
+
   .mobile-scroll {
     overflow-x: auto;
     scrollbar-width: none;

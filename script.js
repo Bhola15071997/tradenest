@@ -25,7 +25,7 @@ const HERO_SLIDES = [
     title: "Built For WhatsApp-First Buying",
     text: "Add items to the enquiry cart, send one structured message and continue the conversation over phone or WhatsApp.",
     image:
-      "https://images.unsplash.com/photo-1599707254554-027aeb4deacd?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-159998869515707254554-027aeb4deacd?auto=format&fit=crop&w=1400&q=80",
   },
 ];
 
@@ -75,7 +75,7 @@ window.updateQty = (productId, change) => {
 };
 
 const generateWhatsAppUrl = (message) => {
-  const phone = window.TRADENEST_CONFIG?.phoneNumber || "9998869515";
+  const phone = window.TRADENEST_CONFIG?.phoneNumber || "";
   return `https://wa.me/${phone}?text=${message}`;
 };
 
@@ -271,7 +271,7 @@ const renderProducts = (products) => {
               class="cta-whatsapp rounded-2xl px-4 py-3 text-center text-sm font-bold text-white">
               WhatsApp Order
             </a>
-            <a href="tel:+91${window.TRADENEST_CONFIG?.phoneNumber || "999886951599"}" class="cta-call rounded-2xl px-4 py-3 text-center text-sm font-bold text-white">Call Now</a>
+            <a href="tel:+91${window.TRADENEST_CONFIG?.phoneNumber || "9998869515"}" class="cta-call rounded-2xl px-4 py-3 text-center text-sm font-bold text-white">Call Now</a>
             <button onclick="addProductToCart('${product.id}')" class="cta-cart rounded-2xl px-4 py-3 text-sm font-bold text-white" type="button">
               Add to Enquiry Cart
             </button>

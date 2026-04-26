@@ -75,7 +75,7 @@ window.updateQty = (productId, change) => {
 };
 
 const generateWhatsAppUrl = (message) => {
-  const phone = window.TRADENEST_CONFIG?.phoneNumber || "919999999999";
+  const phone = window.TRADENEST_CONFIG?.phoneNumber || "9998869515";
   return `https://wa.me/${phone}?text=${message}`;
 };
 
@@ -271,7 +271,7 @@ const renderProducts = (products) => {
               class="cta-whatsapp rounded-2xl px-4 py-3 text-center text-sm font-bold text-white">
               WhatsApp Order
             </a>
-            <a href="tel:+91${window.TRADENEST_CONFIG?.phoneNumber || "9999999999"}" class="cta-call rounded-2xl px-4 py-3 text-center text-sm font-bold text-white">Call Now</a>
+            <a href="tel:+91${window.TRADENEST_CONFIG?.phoneNumber || "999886951599"}" class="cta-call rounded-2xl px-4 py-3 text-center text-sm font-bold text-white">Call Now</a>
             <button onclick="addProductToCart('${product.id}')" class="cta-cart rounded-2xl px-4 py-3 text-sm font-bold text-white" type="button">
               Add to Enquiry Cart
             </button>

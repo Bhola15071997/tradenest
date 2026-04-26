@@ -19,14 +19,33 @@
   </script>
   <link rel="stylesheet" href="style.css?v=20260429" />
 </head>
-<body class="site-shell" data-page-category="">
-  <div class="sticky-top header-glass">
-    <header class="mx-auto max-w-7xl px-4 py-3 md:px-6">
-      <div class="header-layout">
-        <div class="header-brand-row">
-          <a href="index.html" class="brand-link">
-            <img src="assets/tradenest-logo.png" alt="Tradenest logo" class="brand-logo-header" loading="eager" />
-          </a>
+<div class="header-actions desktop-actions">
+  <a href="https://wa.me/919998869515"
+     class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">
+     WhatsApp
+  </a>
+
+  <a href="tel:+919998869515"
+     class="cta-call rounded-2xl px-4 py-3 text-sm font-bold text-white">
+     Call
+  </a>
+
+  <!-- Admin Button Added -->
+  <a href="admin.html"
+     class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">
+     Admin
+  </a>
+
+  <button data-open-cart
+          type="button"
+          class="relative rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">
+    Enquiry Cart
+    <span data-cart-count
+          class="ml-2 inline-flex min-w-7 items-center justify-center rounded-full bg-orange-500 px-2 py-1 text-xs text-white">
+      0
+    </span>
+  </button>
+</div>
           <button id="mobile-menu-toggle" type="button" class="mobile-menu-button lg:hidden" aria-expanded="false" aria-controls="mobile-menu-panel">
             <span class="sr-only">Open menu</span>
             <span></span>

@@ -1,6 +1,6 @@
 const SUPABASE_URL = "https://vvtjbcbxbwtgbixukjwd.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2dGpiY2J4Ynd0Z2JpeHVrandkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5NzM3NzQsImV4cCI6MjA5MjU0OTc3NH0.pQqS-lEnqzCt3AnxqsuVxeT79VrNQKyZPb3yG2ZeHrg";
-const DEFAULT_PHONE = "919999999999";
+const DEFAULT_PHONE = "919998869515";
 
 window.TRADENEST_CONFIG = {
   phoneNumber: DEFAULT_PHONE,

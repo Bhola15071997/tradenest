@@ -19,119 +19,67 @@
   </script>
   <link rel="stylesheet" href="style.css?v=20260429" />
 </head>
-<body>
-
-  <!-- ✅ SINGLE HEADER — no duplicate actions -->
-  <div class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-soft">
+<body class="site-shell" data-page-category="">
+  <div class="sticky-top header-glass">
     <header class="mx-auto max-w-7xl px-4 py-3 md:px-6">
-
-      <!-- Top Row: Logo + Desktop Actions + Mobile Menu Toggle -->
-      <div class="flex items-center justify-between gap-4">
-
-        <!-- Logo -->
-        <a href="index.html" class="shrink-0">
-          <img src="assets/tradenest-logo.png" alt="Tradenest logo" class="brand-logo-full h-10 w-auto" loading="lazy" />
-        </a>
-
-        <!-- Desktop Actions (right side) — single occurrence -->
-        <div class="header-actions desktop-actions hidden lg:flex items-center gap-3">
-          <a href="https://wa.me/919998869515"
-             class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">
-            WhatsApp
+      <div class="header-layout">
+        <div class="header-brand-row">
+          <a href="index.html" class="brand-link">
+            <img src="assets/tradenest-logo.png" alt="Tradenest logo" class="brand-logo-header" loading="eager" />
           </a>
-          <a href="tel:+919998869515"
-             class="cta-call rounded-2xl px-4 py-3 text-sm font-bold text-white">
-            Call
-          </a>
-          <a href="admin.html"
-             class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">
-            Admin
-          </a>
-          <button data-open-cart
-                  type="button"
-                  class="relative rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">
-            Enquiry Cart
-            <span data-cart-count
-                  class="ml-2 inline-flex min-w-7 items-center justify-center rounded-full bg-orange-500 px-2 py-1 text-xs text-white">
-              0
-            </span>
+          <button id="mobile-menu-toggle" type="button" class="mobile-menu-button lg:hidden" aria-expanded="false" aria-controls="mobile-menu-panel">
+            <span class="sr-only">Open menu</span>
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
 
-        <!-- Mobile Menu Toggle -->
-        <button id="mobile-menu-toggle"
-                type="button"
-                class="mobile-menu-button lg:hidden"
-                aria-expanded="false"
-                aria-controls="mobile-menu-panel">
-          <span class="sr-only">Open menu</span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+        <div class="header-search-group">
+          <label class="search-shell flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft">
+            <span class="text-slate-400" aria-hidden="true">⌕</span>
+            <input id="search-input" type="search" placeholder="Search products, brands, categories..." class="w-full border-0 bg-transparent text-sm outline-none" />
+          </label>
+          <select data-district-select class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-soft outline-none">
+            <option>Korba</option>
+            <option>Raipur</option>
+            <option>Bilaspur</option>
+            <option>Durg</option>
+            <option selected>Other</option>
+          </select>
+        </div>
 
-      <!-- Search Row -->
-      <div class="header-search-group mt-3 flex items-center gap-3">
-        <label class="search-shell flex flex-1 items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft">
-          <span class="text-slate-400" aria-hidden="true">⌕</span>
-          <input id="search-input"
-                 type="search"
-                 placeholder="Search products, brands, categories..."
-                 class="w-full border-0 bg-transparent text-sm outline-none" />
-        </label>
-        <select data-district-select
-                class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-soft outline-none">
-          <option>Korba</option>
-          <option>Raipur</option>
-          <option>Bilaspur</option>
-          <option>Durg</option>
-          <option selected>Other</option>
-        </select>
-      </div>
-
-      <!-- Mobile Menu Panel -->
-      <div id="mobile-menu-panel" class="mobile-menu-panel hidden lg:hidden mt-3">
-        <div class="header-actions flex flex-wrap items-center gap-3">
-          <a href="https://wa.me/919998869515"
-             class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">
-            WhatsApp
-          </a>
-          <a href="tel:+919998869515"
-             class="cta-call rounded-2xl px-4 py-3 text-sm font-bold text-white">
-            Call
-          </a>
-          <a href="admin.html"
-             class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">
-            Admin
-          </a>
-          <button data-open-cart
-                  type="button"
-                  class="relative rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">
+        <div class="header-actions desktop-actions">
+          <a href="https://wa.me/919999999999" class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">WhatsApp</a>
+          <a href="tel:+919999999999" class="cta-call rounded-2xl px-4 py-3 text-sm font-bold text-white">Call</a>
+          <a href="admin.html" class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">Admin</a>
+          <button data-open-cart type="button" class="relative rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">
             Enquiry Cart
-            <span data-cart-count
-                  class="ml-2 inline-flex min-w-7 items-center justify-center rounded-full bg-orange-500 px-2 py-1 text-xs text-white">
-              0
-            </span>
+            <span data-cart-count class="ml-2 inline-flex min-w-7 items-center justify-center rounded-full bg-orange-500 px-2 py-1 text-xs text-white">0</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu-panel" class="mobile-menu-panel hidden lg:hidden">
+        <div class="header-actions">
+          <a href="https://wa.me/919999999999" class="cta-whatsapp rounded-2xl px-4 py-3 text-sm font-bold text-white">WhatsApp</a>
+          <a href="tel:+919999999999" class="cta-call rounded-2xl px-4 py-3 text-sm font-bold text-white">Call</a>
+          <a href="admin.html" class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">Admin</a>
+          <button data-open-cart type="button" class="relative rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-soft">
+            Enquiry Cart
+            <span data-cart-count class="ml-2 inline-flex min-w-7 items-center justify-center rounded-full bg-orange-500 px-2 py-1 text-xs text-white">0</span>
           </button>
         </div>
         <div id="category-nav-mobile" class="mobile-scroll mt-3 flex items-center gap-3"></div>
       </div>
-
     </header>
 
-    <!-- Desktop Category Nav -->
     <nav class="desktop-nav border-t border-slate-200/80 bg-white/90">
-      <div id="category-nav"
-           class="mobile-scroll mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 md:px-6">
-      </div>
+      <div id="category-nav" class="mobile-scroll mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 md:px-6"></div>
     </nav>
   </div>
-  <!-- END HEADER -->
-
 
   <main class="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
-
     <section id="hero-slider" class="fade-up"></section>
 
     <section class="mt-8">
@@ -202,6 +150,7 @@
             <p class="text-sm font-bold uppercase tracking-[0.24em] text-orange-600">Request Bulk Quote</p>
             <h3 class="mt-2 text-2xl font-black text-slate-900">Share project requirements</h3>
           </div>
+
           <div class="grid gap-4">
             <input name="name" required placeholder="Name" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
             <input name="phone" required placeholder="Phone" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none" />
@@ -223,7 +172,6 @@
         </form>
       </div>
     </section>
-
   </main>
 
   <footer class="mt-12 bg-slate-950 text-white">
@@ -245,8 +193,8 @@
       <div>
         <p class="text-sm font-bold uppercase tracking-[0.2em] text-orange-300">Contact</p>
         <div class="mt-4 grid gap-2 text-sm text-slate-300">
-          <a href="https://wa.me/919998869515">WhatsApp Sales</a>
-          <a href="tel:+919998869515">Call Now</a>
+          <a href="https://wa.me/919999999999">WhatsApp Sales</a>
+          <a href="tel:+919999999999">Call Now</a>
           <span>Mon-Sat, 9 AM to 7 PM</span>
         </div>
       </div>
@@ -262,12 +210,8 @@
     </div>
   </footer>
 
-  <!-- Cart Drawer Backdrop -->
   <div id="drawer-backdrop" class="drawer-backdrop fixed inset-0 z-[70] hidden"></div>
-
-  <!-- Cart Drawer -->
-  <aside id="cart-drawer"
-         class="cart-drawer fixed right-0 top-0 z-[75] flex h-screen translate-x-full flex-col bg-white shadow-2xl transition duration-300">
+  <aside id="cart-drawer" class="cart-drawer fixed right-0 top-0 z-[75] flex h-screen translate-x-full flex-col bg-white shadow-2xl transition duration-300">
     <div class="border-b border-slate-200 p-5">
       <div class="flex items-center justify-between">
         <div>
@@ -278,9 +222,7 @@
       </div>
     </div>
     <div class="flex-1 overflow-y-auto p-5">
-      <div id="cart-empty" class="rounded-3xl border border-dashed border-slate-300 p-6 text-center text-sm font-semibold text-slate-500">
-        Add products to build a quotation request.
-      </div>
+      <div id="cart-empty" class="rounded-3xl border border-dashed border-slate-300 p-6 text-center text-sm font-semibold text-slate-500">Add products to build a quotation request.</div>
       <div id="cart-items" class="grid gap-3"></div>
     </div>
     <div class="border-t border-slate-200 p-5">
@@ -297,6 +239,5 @@
   <script src="supabase-client.js?v=20260429"></script>
   <script src="cart.js?v=20260429"></script>
   <script src="script.js?v=20260429"></script>
-
 </body>
 </html>

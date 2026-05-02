@@ -6,6 +6,30 @@ let currentEditId = null;
 let currentEnquiryId = null;
 
 const getEnquiryStatus = (enquiry) => enquiry.status || "new";
+const resolveAdminImageUrl = (imageUrl) => {
+  if (!imageUrl) {
+    return "";
+  }
+
+  const value = String(imageUrl).trim();
+  if (!value) {
+    return "";
+  }
+
+  if (
+    value.startsWith("http://") ||
+    value.startsWith("https://") ||
+    value.startsWith("data:") ||
+    value.startsWith("/") ||
+    value.startsWith("./") ||
+    value.startsWith("../") ||
+    value.startsWith("assets/")
+  ) {
+    return value;
+  }
+
+  return `assets/${value}`;
+};
 
 const updateProductPreview = (imageUrl = "") => {
   const wrap = document.getElementById("product-image-preview-wrap");
@@ -123,7 +147,7 @@ const renderAdminProducts = () => {
     <tr class="border-b border-slate-100">
       <td class="px-4 py-4">
         <div class="flex items-center gap-3">
-          <img src="${product.image_url || ""}" alt="${product.product_name}" class="h-12 w-12 rounded-2xl object-cover" onerror="this.style.display='none'" />
+          <img src="${resolveAdminImageUrl(product.image_url)}" alt="${product.product_name}" class="h-12 w-12 rounded-2xl object-cover" onerror="this.style.display='none'" />
           <div>
             <p class="font-bold text-slate-900">${product.product_name}</p>
             <p class="text-xs text-slate-500">${product.id}</p>
